@@ -19,12 +19,13 @@ def _RC4keySchedule(key):
 def _RC4PRGA(state):
 	x, y = 0, 0
 	seeds = []
-	# Discard first 1536 bytes of the keystream according to RFC4345 as they may reveal information about key used (a set of these keys could reveal information about the source for our key)
+	# Discard first 1536 bytes of the keystream according to RFC4345 as they may reveal information
+	# about key used (a set of these keys could reveal information about the source for our key)
 	for i in range((1536//4)+4):
 		x = (x+1)%256
 		y = (y+state[x])%256
 		_swap(state, x, y)
-		if i >= 1536:
+		if i >= (1536//4):
 			seeds.append(state[(state[x]+state[y])%256])
 	return seeds
 
