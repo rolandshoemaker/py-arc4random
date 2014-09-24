@@ -2,13 +2,11 @@
 
 import random
 
-@profile
 def arc4random():
 	key = random.sample(range(256), 256) # something
 	seeds = _RC4PRGA(_RC4keySchedule(key))
 	return (seeds[0]<<24)|(seeds[1]<<16)|(seeds[2]<<8)|seeds[3]
 
-@profile
 def _RC4keySchedule(key):
 	sbox = list(range(256))
 	x = 0
@@ -18,7 +16,6 @@ def _RC4keySchedule(key):
 		_swap(sbox, i, x)
 	return sbox
 
-@profile
 def _RC4PRGA(state):
 	x, y = 0, 0
 	seeds = []
@@ -31,8 +28,6 @@ def _RC4PRGA(state):
 			seeds.append(state[(state[x]+state[y])%256])
 	return seeds
 
-@profile
 def _swap(listy, n1, n2):
 	listy[n1], listy[n2] = listy[n2], listy[n1]
 
-arc4random()
