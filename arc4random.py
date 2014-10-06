@@ -2,10 +2,22 @@
 
 import random
 
-def arc4random():
+def rand():
 	key = random.sample(range(256), 256) # something
 	seeds = _RC4PRGA(_RC4keySchedule(key))
 	return (seeds[0]<<24)|(seeds[1]<<16)|(seeds[2]<<8)|seeds[3]
+
+def randrange(x, y=None):
+	if y:
+		return (rand()%((y-x)+1))+x
+	else:
+		return rand()%x
+
+def randsample(Rmin, Rmax, size):
+	sample = []
+	for i in range(size):
+		sample.append((rand()%((Rmax-Rmin)+1))+Rmin)
+	return sample
 
 def _RC4keySchedule(key):
 	sbox = list(range(256))
