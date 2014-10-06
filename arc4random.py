@@ -11,7 +11,7 @@ def randrange(x, y=None):
 	if y:
 		return (rand()%((y-x)+1))+x
 	else:
-		return rand()%x
+		return rand()%(x+1)
 
 def randsample(Rmin, Rmax, size):
 	sample = []
